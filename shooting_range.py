@@ -12,6 +12,12 @@ land_bg = pygame.image.load("Land_BG.png")
 water_bg = pygame.image.load("Water_BG.png")
 cloud_1 = pygame.image.load("Cloud1.png")
 cloud_2 = pygame.image.load("Cloud2.png")
+crosshair = pygame.image.load("crosshair.png")
+duck = pygame.image.load("duck.png")
+
+ # set crosshair_rect to the center of the screen   
+crosshair_rect = crosshair.get_rect(center = (400, 250))
+
 
 land_position_y = 370
 land_speed = 1
@@ -24,6 +30,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.MOUSEMOTION:
+            crosshair_rect = crosshair.get_rect(center = event.pos)
     # Copy images to screen:
     screen.blit(wood_bg, (0, 0))
     screen.blit(land_bg,(0,land_position_y))
@@ -32,6 +40,7 @@ while True:
     screen.blit(cloud_2,(500, 10))
     screen.blit(cloud_1,(300, 20))
     screen.blit(cloud_2,(200, 15))
+    screen.blit(crosshair, crosshair_rect)
     
     #When we subtract a negative number from a positive number, it is equivalent to adding a positive version of the negative number.  when land_speed is negative, it is equivalent to adding a positive version of land_speed and when land_speed is positive, it is equivalent to subtracting a positive version of land_speed so when land_posiiton_y is 340, land_speed becomes -1 and then 340 - (-1) is actually adding 1 to land_position_y.  When land_position_y is 370, land_speed becomes 1 and then 370 - 1 is actually subtracting 1 from land_position_y.
     land_position_y -= land_speed
